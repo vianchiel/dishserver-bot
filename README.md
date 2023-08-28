@@ -6,7 +6,7 @@ Python 3.10 or above
 
 ## How to Execute
 1. `python3 -m venv env`
-2. `pip3 -r install requirements.txt`
+2. `pip3 install -r requirements.txt`
 3. `env/bin/python3 app.py`
 
 More details will be added further into development.
