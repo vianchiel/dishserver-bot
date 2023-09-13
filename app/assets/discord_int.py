@@ -38,19 +38,19 @@ class Discord_Interface:
     async def on_message(self, message):
         if message.author == self.client.user:
             return
-        if message.content.startswith("bottestcurds"):
+        if message.content.lower().startswith("cheese curds test"):
             print(message)
             luckyman = random.choice(
                 [member for member in message.guild.members]
                 )
-            print(luckyman)
-
             
-            await message.channel.send('Congratulations, you are chosen to purchase Quails Cheese Curds!' + luckyman.name)
+            embed = discord.Embed(
+                colour=discord.Colour.dark_teal(),
+                title="Congratulations " + luckyman.display_name + "!",
+                description="You are chosen to purchase Quails Cheese Curds!"
+            )
 
-    
-    def handle_response(self, message):
-        p_
+            await message.channel.send("<@!" + str(luckyman.id) + ">",embed=embed)
 
     def run(self):
         self.client.run(self.token)
