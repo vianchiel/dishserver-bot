@@ -3,6 +3,7 @@ import os
 
 # Importing Assets
 import assets.config as config
+import assets.discord_int as discord_int
 
 # Set Global Variables
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -19,6 +20,14 @@ class DishWasher:
         # Get Configurations
         self.cur_config = config.parse().get_config()
         self.cur_config_dscd = self.cur_config['discord.configs']
+        
+        # Initiate discord interface
+        dsc_app = discord_int.Discord_Interface(
+            config = self.cur_config_dscd
+            )
+        dsc_app.run()
+        
+        
 
 if __name__ == '__main__':
     app = DishWasher()
