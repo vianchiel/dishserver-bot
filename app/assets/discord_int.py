@@ -38,7 +38,7 @@ class Discord_Interface:
     async def on_message(self, message):
         if message.author == self.client.user:
             return
-        if message.content.lower().startswith("cheese curds test"):
+        if message.content.lower().startswith("cheese curds"):
             print(message)
             luckyman = random.choice(
                 [member for member in message.guild.members]
