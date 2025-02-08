@@ -1,4 +1,5 @@
 # Core Libraries
+import logging
 import os
 import requests
 import random
@@ -25,34 +26,38 @@ class Discord_Interface:
     
     async def on_ready(self):
         # Display welcome message
-        print('Logged in as {0.user}'.format(self.client))
+        logging.info('Logged in as {0.user}'.format(self.client))
 
         # Retrieve list of servers
         self.guild = [guild for guild in self.client.guilds]
 
         # Display list of servers
-        print('Available Guilds:')
+        logging.info('Available Guilds:')
         for guild in self.guild:
-            print('\t' + guild.name)
+            logging.info('\t' + guild.name)
 
     async def on_message(self, message):
         if message.author == self.client.user:
             return
+        
+        # If message contains my string
         if message.content.lower().startswith("cheese curds"):
-            print(message)
+            logging.info(message)
+
+            # Choose random member in channel
             luckyman = random.choice(
                 [member for member in message.guild.members]
                 )
             
+            # Prepare message block to send
             embed = discord.Embed(
                 colour=discord.Colour.dark_teal(),
                 title="Congratulations " + luckyman.display_name + "!",
                 description="You are chosen to purchase Quails Cheese Curds!"
             )
 
+            # Send the message
             await message.channel.send("<@!" + str(luckyman.id) + ">",embed=embed)
 
     def run(self):
         self.client.run(self.token)
-    
-
